@@ -1,6 +1,9 @@
 const express = require('express');
+//const routes = require('./routes')//
 const connection = require('./database/connection');
 const app = express();
+
+//app.use('/api', routes)//
 
 app.get('/health', (req, res) => {
   return res.send('OK');
