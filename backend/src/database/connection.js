@@ -1,10 +1,13 @@
-const mysql = require('mysql2/promise');
+const { Pool } = require('pg');
 
-const connection = mysql.createPool({
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || '123456',
-  database: process.env.DB_NAME || 'taskhub',
+const connection = new Pool({
+  user: 'postgres',        
+  host: 'localhost',
+  database: 'taskhub',
+  password: 'admin',       
+  port: 5432,              
 });
+
+console.log('Criando pool de conexão com o PostgreSQL...');
 
 module.exports = connection;
