@@ -1,23 +1,24 @@
 const connection = require('./src/database/connection');
 
-async function createTable() {
+async function createUsersTable() {
   try {
     const sql = `
-      CREATE TABLE IF NOT EXISTS cards (
+      CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,
-        title VARCHAR(255) NOT NULL,
-        description TEXT,
-        column_name VARCHAR(50) DEFAULT 'TODO'
+        name VARCHAR(100) NOT NULL,
+        email VARCHAR(150) UNIQUE NOT NULL,
+        password VARCHAR(255) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
     `;
 
     await connection.query(sql);
-    console.log('✅ Tabela CARDS criada com sucesso!');
+    console.log('✅ Tabela USERS criada com sucesso!');
   } catch (error) {
-    console.error('❌ Erro ao criar tabela:', error);
+    console.error('❌ Erro ao criar tabela de USERS:', error);
   } finally {
-    await connection.end(); 
+    await connection.end();
   }
 }
 
-createTable();
+createUsersTable();

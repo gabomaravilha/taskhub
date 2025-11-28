@@ -22,6 +22,23 @@ const CardController = {
     } catch (error) {
       return res.status(500).json({ error: error.message });
     }
+  },
+  async update(req, res) {
+    try {
+      const { id } = req.params; 
+      const { title, description, column_name } = req.body;
+      const updatedCard = await CardModel.update(id, { 
+        title, 
+        description, 
+        column_name 
+      });
+      if (!updatedCard) {
+        return res.status(404).json({ error: "Card não encontrado" });
+      }
+      return res.json(updatedCard);
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
   }
 };
 
